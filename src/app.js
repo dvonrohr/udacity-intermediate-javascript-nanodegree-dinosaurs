@@ -1,6 +1,5 @@
-
     // Create Dino Constructor
-
+console.log('dino');
 
     // Create Dino Objects
 

@@ -1,0 +1,25 @@
+{
+  "name": "udacity-intermediate-javascript-nanodegree-program-dinosaurs",
+  "version": "1.0.0",
+  "description": "## Student Instructions",
+  "main": "app.js",
+  "scripts": {
+    "dev": "babel-watch src/app.js",
+    "build": "babel src -d build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dvonrohr/udacity-intermediate-javascript-nanodegree-program-dinosaurs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dvonrohr/udacity-intermediate-javascript-nanodegree-program-dinosaurs/issues"
+  },
+  "homepage": "https://github.com/dvonrohr/udacity-intermediate-javascript-nanodegree-program-dinosaurs#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0"
+  }
+}
