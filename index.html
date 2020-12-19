@@ -35,9 +35,19 @@
                 <option>Omnivor</option>
                 <option>Carnivor</option>
             </select>
-            <div id="btn">Compare Me!</div>
+            <button id="btn">Compare Me!</button>
         </div>
     </form>
+    
+    <!-- Tile fragment, describes a grid-item used inside #grid -->
+    <template id="dino-grid-template">
+        <div class="grid-item">
+            <h3 id="name"></h3>
+            <img id="image" src="" alt="">
+            <p id="fact"></p>
+        </div>
+    </template>
+
     <!-- .grid to attach tiles to -->
     <main id="grid"></main>
     <footer>
