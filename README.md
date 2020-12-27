@@ -25,3 +25,5 @@ Run the development server:
 ```
 npm run dev
 ```
+
+Open the project in your browser by visiting http://localhost:1234
