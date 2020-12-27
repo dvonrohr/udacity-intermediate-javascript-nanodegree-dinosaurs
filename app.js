@@ -1,5 +1,5 @@
-import dinos from "./dino.json";
-import images from "./images/*.png";
+import dinos from './dino.json';
+import images from './images/*.png';
 
 /**
  * @description Respresents a dinosaur
@@ -12,7 +12,9 @@ import images from "./images/*.png";
  * @param {string} when - The epoch the dinosaur was active
  * @param {string} fact - A given fact about the dinosaur
  */
-function Dinosaur({ species, weight, height, diet, where, when, fact }) {
+function Dinosaur({
+  species, weight, height, diet, where, when, fact,
+}) {
   this.species = species;
   this.weight = weight;
   this.height = height;
@@ -23,7 +25,7 @@ function Dinosaur({ species, weight, height, diet, where, when, fact }) {
   this.renderable = {
     name: this.species,
     image: images[this.species.toLowerCase()],
-  }
+  };
 }
 
 /**
@@ -35,30 +37,32 @@ function Dinosaur({ species, weight, height, diet, where, when, fact }) {
  * @param {number} weight - The weight of the human
  * @param {diet} where - The diet of the human
  */
-function Human({ name, feet, inches, weight, diet }) {
+function Human({
+  name, feet, inches, weight, diet,
+}) {
   this.name = name;
   this.height = feet * 12 + inches;
   this.weight = weight;
   this.diet = diet;
-  this.image = images["human"];
+  this.image = images.human;
   this.renderable = {
     name: this.name,
-    image: images['human'],
-  }
+    image: images.human,
+  };
 }
 
 /**
  * @description Fetch data given in the html-form to create a human object
- * @returns {Human} Instance of Human with given values from the form element 
+ * @returns {Human} Instance of Human with given values from the form element
  */
 const getHumanDataFromForm = (function () {
-  const form = document.getElementById("dino-compare");
+  const form = document.getElementById('dino-compare');
 
   return function () {
     const data = new FormData(form);
     return new Human(Object.fromEntries(data));
   };
-})();
+}());
 
 /**
  * @description Compares the weight of the given dinosaur with the human's
@@ -66,7 +70,7 @@ const getHumanDataFromForm = (function () {
  * @returns {string} A fact according the difference of weight
  */
 Dinosaur.prototype.compareWeight = function (human) {
-  const weight = human.weight;
+  const { weight } = human;
   const diff = Math.abs(this.weight - weight);
 
   if (this.weight < weight) {
@@ -77,7 +81,7 @@ Dinosaur.prototype.compareWeight = function (human) {
     return `I weigh ${diff} lbs more than you.`;
   }
 
-  return "We are the same weight.";
+  return 'We are the same weight.';
 };
 
 /**
@@ -86,7 +90,7 @@ Dinosaur.prototype.compareWeight = function (human) {
  * @returns {string} A fact according the difference of height
  */
 Dinosaur.prototype.compareHeight = function (human) {
-  const height = human.height;
+  const { height } = human;
   const diff = Math.abs(this.height - height);
 
   if (this.height < height) {
@@ -97,7 +101,7 @@ Dinosaur.prototype.compareHeight = function (human) {
     return `I am ${diff} inches taller than you.`;
   }
 
-  return "We are the same size.";
+  return 'We are the same size.';
 };
 
 /**
@@ -111,7 +115,7 @@ Dinosaur.prototype.compareDiet = function (human) {
   if (this.diet !== diet) {
     return `You are a ${diet} but I'm a ${this.diet}`;
   }
-  
+
   return `We are both ${diet}'s`;
 };
 
@@ -120,7 +124,7 @@ Dinosaur.prototype.compareDiet = function (human) {
  * @returns {string} A random fact
  */
 Dinosaur.prototype.compareRandom = function (human) {
-  const facts = ["compareDiet", "compareHeight", "compareWeight"];
+  const facts = ['compareDiet', 'compareHeight', 'compareWeight'];
   const randomNumber = Math.floor(Math.random() * Math.floor(facts.length));
 
   return this[facts[randomNumber]](human);
@@ -133,13 +137,13 @@ Dinosaur.prototype.compareRandom = function (human) {
 function createTile(fragment, obj, compareTo) {
   const instance = fragment.content.cloneNode(true);
 
-  const name = instance.querySelector("#name");
+  const name = instance.querySelector('#name');
   name.textContent = obj.renderable.name;
 
-  const image = instance.querySelector("#image");
+  const image = instance.querySelector('#image');
   image.src = obj.renderable.image;
 
-  const fact = instance.querySelector("#fact");
+  const fact = instance.querySelector('#fact');
 
   if (!compareTo) {
     fact.remove();
@@ -156,25 +160,23 @@ function createTile(fragment, obj, compareTo) {
  * @description Create tiles for dinosaur's and human and append to document
  */
 function createTiles(human) {
-  const fragment = document.getElementById("dino-grid-template");
-  const tiles = dinos.Dinos.map((dino) =>
-    createTile(fragment, new Dinosaur(dino), human)
-  );
+  const fragment = document.getElementById('dino-grid-template');
+  const tiles = dinos.Dinos.map((dino) => createTile(fragment, new Dinosaur(dino), human));
 
   // add human in the middle of the dino tiles
   tiles.splice(4, 0, createTile(fragment, human));
 
-  document.getElementById("grid").append(...tiles);
+  document.getElementById('grid').append(...tiles);
 }
 
 /**
  * @description Removes the form in the document
  */
 function removeFormFromScreen() {
-  document.getElementById("dino-compare").remove();
+  document.getElementById('dino-compare').remove();
 }
 
-document.getElementById("dino-compare").addEventListener("submit", function () {
+document.getElementById('dino-compare').addEventListener('submit', () => {
   // hide form
   removeFormFromScreen();
 
