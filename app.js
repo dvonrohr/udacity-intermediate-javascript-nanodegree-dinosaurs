@@ -52,19 +52,6 @@ function Human({
 }
 
 /**
- * @description Fetch data given in the html-form to create a human object
- * @returns {Human} Instance of Human with given values from the form element
- */
-const getHumanDataFromForm = (function () {
-  const form = document.getElementById('dino-compare');
-
-  return function () {
-    const data = new FormData(form);
-    return new Human(Object.fromEntries(data));
-  };
-}());
-
-/**
  * @description Compares the weight of the given dinosaur with the human's
  * @param {Human} - human
  * @returns {string} A fact according the difference of weight
@@ -177,11 +164,15 @@ function removeFormFromScreen() {
 }
 
 document.getElementById('dino-compare').addEventListener('submit', () => {
+  // get human data
+  const human = (function () {
+    const form = document.getElementById('dino-compare');
+    const data = new FormData(form);
+    return new Human(Object.fromEntries(data));
+  }());
+
   // hide form
   removeFormFromScreen();
-
-  // get human data
-  const human = getHumanDataFromForm();
 
   // add tiles
   createTiles(human);
